@@ -5,5 +5,6 @@ from flask import abort
 , binary=False) """
 
 def findKeywords(likedKeywords, dislikedKeywords):
-    result = model.most_similar(positive=likedKeywords, negative=dislikedKeywords, topn=2)
-    return result
+    """ result = model.most_similar(positive=likedKeywords, negative=dislikedKeywords, topn=2)
+    return result """
+    return likedKeywords
