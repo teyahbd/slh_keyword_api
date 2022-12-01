@@ -1,5 +1,5 @@
 from flask import Flask, abort, request
-from model import findKeywords
+from model.model import find_keywords
 import json
 
 app =  Flask(__name__)
@@ -12,7 +12,7 @@ def home():
 def model():
     try:
         words = request.json
-        return json.dumps({'keywords': findKeywords(words['positive'], words['negative'] )})
+        return json.dumps({'keywords': find_keywords(words['positive'], words['negative'] )})
     except:
         abort(400)
 
