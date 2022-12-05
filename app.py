@@ -1,8 +1,10 @@
-from flask import Flask, abort, request
-from model import findKeywords
+from flask import Flask, abort, request, render_template
+from model.model import find_keywords
+from flask_cors import CORS
 import json
 
 app =  Flask(__name__)
+cors = CORS(app)
 
 @app.route("/")
 def home():
@@ -12,7 +14,7 @@ def home():
 def model():
     try:
         words = request.json
-        return json.dumps({'keywords': findKeywords(words['positive'], words['negative'] )})
+        return json.dumps({'keywords': find_keywords(words['positive'], words['negative'] )})
     except:
         abort(400)
 
@@ -22,4 +24,4 @@ def not_found():
 
 @app.errorhandler(400)
 def handle_400(e):
-    return 'Request object not formatted correctly', 400
+    return render_template("400.html"), 400
