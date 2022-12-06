@@ -1,9 +1,6 @@
-from gensim.models import KeyedVectors
-import os
+import gensim.downloader as api
 
-data_path = os.path.dirname(os.path.abspath(__file__)) + "/wiki-50d.txt"
-
-model = KeyedVectors.load_word2vec_format(data_path, binary=False) 
+model = api.load("glove-wiki-gigaword-50")
 
 def find_keywords(liked_keywords, disliked_keywords):
     result = model.most_similar(positive=liked_keywords, negative=disliked_keywords, topn=2)
